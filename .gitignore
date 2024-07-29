@@ -1,0 +1,4 @@
+db.*
+media/
+venv/
+*__pycache__
