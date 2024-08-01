@@ -3,7 +3,12 @@ from cars.models import Cars
 
 
 def cars_view(request):
-    cars = Cars.objects.all()
+    search = request.GET.get('search')
+
+    if search:
+        cars = Cars.objects.filter(model__icontains = search)
+    else: 
+        cars = Cars.objects.all()
     
     return(
         render(
