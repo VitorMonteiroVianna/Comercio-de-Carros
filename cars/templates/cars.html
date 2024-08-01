@@ -9,8 +9,10 @@
     <h1>
         Carros
     </h1>
+    {% for car in cars %}
     <p>
-        Aqui vão aparecer os carros do projeto
+        {{car.model}}
     </p>
+    {% endfor %}
 </body>
 </html>
