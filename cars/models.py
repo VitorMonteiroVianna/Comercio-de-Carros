@@ -17,7 +17,7 @@ class Cars(models.Model):
     factory_yaer = models.IntegerField(null=True, blank=True)
     model_yaer = models.IntegerField(null=True, blank=True)
     value = models.FloatField(null=True, blank=True)
-    iamge = models.ImageField(upload_to="cars", blank=True, null=True)
+    image = models.ImageField(upload_to="cars", blank=True, null=True)
     
     def __str__(self):
         return f"{self.model} --> ID '{self.id}'"

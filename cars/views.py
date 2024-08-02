@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from cars.models import Cars
 
 
@@ -17,3 +17,8 @@ def cars_view(request):
             {"cars" : cars}
         )
     )
+
+# def cars_view(request):
+#     cars = Cars.objects.filter(model = 'C4')
+#     for car in cars:
+#         return HttpResponse(car.image.url)
