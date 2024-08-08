@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from cars.models import Cars
+from cars.forms import AddCarForm
 
 
 def cars_view(request):
@@ -18,7 +19,14 @@ def cars_view(request):
         )
     )
 
-# def cars_view(request):
-#     cars = Cars.objects.filter(model = 'C4')
-#     for car in cars:
-#         return HttpResponse(car.image.url)
+
+def add_cars_view(request):
+    add_car_form = AddCarForm()
+    
+    return(
+        render(
+            request,
+            'add_cars.html',
+            {"add_car_form" : add_car_form}
+        )
+    )
