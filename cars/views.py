@@ -21,7 +21,12 @@ def cars_view(request):
 
 
 def add_cars_view(request):
-    add_car_form = AddCarForm()
+    if request.method == 'POST':
+        form = AddCarForm(request.POST)
+        print(form)
+    
+    else:
+        add_car_form = AddCarForm()
     
     return(
         render(
