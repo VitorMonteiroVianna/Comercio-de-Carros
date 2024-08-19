@@ -6,7 +6,21 @@
 <form method="post">
     {% csrf_token %}
     
-    {{ user_creation_form }}
+    <div class="form-group">
+        <label>Usuario: </label>
+        {{ user_creation_form.username }}
+        {{ user_creation_form.username.errors }}
+    </div>
+    <div class="form-group">
+        <label>Senha: </label>
+        {{ user_creation_form.password1 }}
+        {{ user_creation_form.password1.errors }}
+    </div>
+    <div class="form-group">
+        <label>Confirme a senha: </label>
+        {{ user_creation_form.password2 }}
+        {{ user_creation_form.password2.errors }}
+    </div>
     <input type="submit" value="Cadastrar">
 </form>
 
