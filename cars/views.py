@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from cars.models import Cars
 from cars.forms import AddCarForm
-from django.urls import reverse
+
 
 def cars_view(request):
     search = request.GET.get('search')
@@ -18,6 +18,7 @@ def cars_view(request):
             {"cars" : cars}
         )
     )
+
 
 def add_cars_view(request):    
     if not request.user.is_authenticated:
