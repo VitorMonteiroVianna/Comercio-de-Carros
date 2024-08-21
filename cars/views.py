@@ -23,23 +23,31 @@ class CarsView(View):
         )
 
 
-def add_cars_view(request):    
-    if not request.user.is_authenticated:
-        return redirect('authenticate_user')
+class AddCarsView(View):
     
-    if request.method == 'POST':
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('authenticate_user')
+        
+        add_car_form = AddCarForm()
+        return(
+            render(
+                request,
+                'add_cars.html',
+                {"add_car_form" : add_car_form}
+            )
+        )
+    
+    def post(self, request):
         add_car_form = AddCarForm(request.POST, request.FILES)
         if add_car_form.is_valid():
             add_car_form.save()
             return redirect('cars_list')
-    
-    else:
-        add_car_form = AddCarForm()
-    
-    return(
-        render(
-            request,
-            'add_cars.html',
-            {"add_car_form" : add_car_form}
+        
+        return(
+            render(
+                request,
+                'add_cars.html',
+                {"add_car_form" : add_car_form}
+            )
         )
-    )
