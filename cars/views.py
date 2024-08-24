@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from cars.models import Cars
 from cars.forms import AddCarForm
 from django.views import View
-from django.views.generic import ListView
-from django.views.generic.edit import CreateView
+from django.views.generic import ListView, DetailView, CreateView
+# from django.views.generic.edit import CreateView
 
 
 
@@ -18,6 +18,11 @@ class CarsListView(ListView):
         if search:
             cars = cars.filter(model__icontains = search)
         return cars
+
+
+class CarDetailView(DetailView):
+    model = Cars
+    template_name = 'car_detail.html'
 
 
 class AddCarCreateView(CreateView):
