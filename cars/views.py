@@ -3,6 +3,7 @@ from cars.models import Cars
 from cars.forms import AddCarForm
 from django.views import View
 from django.views.generic import ListView
+from django.views.generic.edit import CreateView
 
 
 
@@ -19,31 +20,9 @@ class CarsListView(ListView):
         return cars
 
 
-class AddCarsView(View):
-    
-    def get(self, request):
-        if not request.user.is_authenticated:
-            return redirect('authenticate_user')
-        
-        add_car_form = AddCarForm()
-        return(
-            render(
-                request,
-                'add_cars.html',
-                {"add_car_form" : add_car_form}
-            )
-        )
-    
-    def post(self, request):
-        add_car_form = AddCarForm(request.POST, request.FILES)
-        if add_car_form.is_valid():
-            add_car_form.save()
-            return redirect('cars_list')
-        
-        return(
-            render(
-                request,
-                'add_cars.html',
-                {"add_car_form" : add_car_form}
-            )
-        )
+class AddCarCreateView(CreateView):
+    model = Cars
+    form_class = AddCarForm
+    success_url = '/cars'
+    template_name = 'add_cars.html'
+
