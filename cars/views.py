@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from cars.models import Cars
 from cars.forms import AddCarForm
 from django.views import View
-from django.views.generic import ListView, DetailView, CreateView
-# from django.views.generic.edit import CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 
 
@@ -31,3 +30,9 @@ class AddCarCreateView(CreateView):
     success_url = '/cars'
     template_name = 'add_cars.html'
 
+
+class CarUpdateView(UpdateView):
+    model = Cars
+    form_class = AddCarForm
+    template_name = 'car_update.html'
+    success_url = '/cars'
