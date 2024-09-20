@@ -21,3 +21,15 @@ class Cars(models.Model):
     
     def __str__(self):
         return f"{self.model} --> ID '{self.id}'"
+
+
+class CarInventory(models.Model):
+    cars_count = models.IntegerField()
+    cars_value = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at'] #Ordena pela coluna create at, DESC (-)
+    
+    def __str__(self):
+        return f'{self.cars_count} - {self.cars_value}'
