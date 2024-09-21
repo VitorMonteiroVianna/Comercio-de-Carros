@@ -31,4 +31,4 @@ def cars_pre_save(sender, instance, **kwargs):
         instance.bio = "O vendedor optou por não adicionar BIO"
     
     if not instance.image:
-        instance.image = 'cars/nao_encontrado.png'
+        instance.image = 'nao_encontrado.png'
