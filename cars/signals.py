@@ -1,20 +1,25 @@
-from django.db.models.signals import pre_save, pre_delete, post_save, post_delete
+from cars.models import Cars, CarInventory
 from django.dispatch import receiver
-from cars.models import Cars
+from django.db.models.signals import post_delete, post_save
+from django.db.models import Sum
 
 
-@receiver(pre_save, sender=Cars)
-def car_pre_save(sender, instance, **kwargs):
-    print("TESTE DE PRE SAVE EM CARRO") 
-    
-@receiver(pre_delete, sender=Cars)
-def car_pre_delete(sender, instance, **kwargs):
-    print("TESTE DE PRE DELETE EM CARRO") 
-    
-@receiver(post_save, sender=Cars)
-def car_post_save(sender, instance, **kwargs):
-    print("TESTE DE POST SAVE EM CARRO") 
-    
-@receiver(post_delete, sender=Cars)
-def car_post_delete(sender, instance, **kwargs):
-    print("TESTE DE POST DELETE EM CARRO") 
+def update_car_inventory():
+    qnt_cars = Cars.objects.all().count()
+    sum_cars_value = Cars.objects.aggregate(
+        sum_value = Sum('value')
+    )
+    CarInventory.objects.create(
+        cars_count = qnt_cars,
+        cars_value = sum_cars_value['sum_value']
+    )
+
+
+@receiver(post_save, sender = Cars)
+def cars_post_save(sender, instance, **kwargs):
+    update_car_inventory()
+
+
+@receiver(post_delete, sender = Cars)
+def cars_post_delete(sender, instance, **kwargs):
+    update_car_inventory()
