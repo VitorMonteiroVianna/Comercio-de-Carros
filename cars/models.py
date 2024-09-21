@@ -18,6 +18,7 @@ class Cars(models.Model):
     model_yaer = models.IntegerField(null=True, blank=True)
     value = models.FloatField(null=True, blank=True)
     image = models.ImageField(upload_to="cars", blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return f"{self.model} --> ID '{self.id}'"
